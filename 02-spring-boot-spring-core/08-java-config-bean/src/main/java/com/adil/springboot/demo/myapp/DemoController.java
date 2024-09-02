@@ -10,14 +10,12 @@ public class DemoController {
 
     // define a private field for the dependency
     private Coach myCoach;
-    private Coach anotherCoach;
 
     // Qualifier for constructor injection
     @Autowired
-    public DemoController(@Qualifier("cricketCoach") Coach theCoach, @Qualifier("cricketCoach") Coach theAnotherCoach) {
+    public DemoController(@Qualifier("swimCoach") Coach theCoach) {
         System.out.println("In constructor: " + getClass().getSimpleName());
         myCoach = theCoach;
-        anotherCoach = theAnotherCoach;
     }
 
     @GetMapping("/dailyWorkOut")
@@ -25,8 +23,4 @@ public class DemoController {
         return myCoach.getDailyWorkOut();
     }
 
-    @GetMapping("/check")
-    public String check() {
-        return "Comparing beans: myCoach == anotherCoach, " + (myCoach == anotherCoach);
-    }
 }

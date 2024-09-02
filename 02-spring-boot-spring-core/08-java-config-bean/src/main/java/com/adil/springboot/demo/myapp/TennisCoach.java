@@ -1,17 +1,17 @@
 package com.adil.springboot.demo.myapp;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class TrackCoach implements Coach {
+public class TennisCoach implements Coach {
 
-    public TrackCoach() {
+    public TennisCoach() {
         System.out.println("In constructor: " + getClass().getSimpleName());
     }
 
-    @Autowired
+    @Override
     public String getDailyWorkOut() {
-        return "Please run atleast 10 mins";
+        return "Please walk atleast 30 mins daily!!!";
     }
+
 }
