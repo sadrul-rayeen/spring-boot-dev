@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import com.adil.springboot.demo.entity.Employee;
 
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.TypedQuery;
 
 @Repository
 public class EmployeeDAOJpaImpl implements EmployeeDAO {
@@ -16,19 +17,43 @@ public class EmployeeDAOJpaImpl implements EmployeeDAO {
     private EntityManager entityManager;
 
     @Autowired
-    public EmployeeDAOJpaImpl(EntityManager thEntityManager) {
-        entityManager = thEntityManager;
+    public EmployeeDAOJpaImpl(EntityManager theEntityManager) {
+        entityManager = theEntityManager;
     }
 
     @Override
     public List<Employee> findAll() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'findAll'");
+        // create a query
+        TypedQuery<Employee> theQuery = entityManager.createQuery("from Employee", Employee.class);
+
+        // execute query and get result list
+        List<Employee> employees = theQuery.getResultList();
+
+        // return the results
+        return employees;
     }
 
-    // @Override
-    // public List<Employee> findAll() {
-        
-    // }
+    @Override
+    public Employee findById(int theId) {
+        // get employee
+        Employee theEmployee = entityManager.find(Employee.class, theId);
+        // return employee
+        return theEmployee;
+    }
+
+    @Override
+    public Employee save(Employee theEmployee) {
+        // save the employee
+        Employee dbEmployee = entityManager.merge(theEmployee);
+        // return the employee
+        return dbEmployee;
+    }
+
+    @Override
+    public void deleteById(int theId) {
+        Employee theEmployee = entityManager.find(Employee.class, theId);
+
+        entityManager.remove(theEmployee);
+    }
 
 }
