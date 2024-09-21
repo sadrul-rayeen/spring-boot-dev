@@ -11,14 +11,14 @@ import jakarta.validation.Valid;
 
 @Controller
 public class CustomerController {
-    @GetMapping("/")
+    @GetMapping("/api/")
     public String showForm(Model theModel) {
         theModel.addAttribute("customer", new Customer());
 
         return "customer-form";
     }
 
-    @PostMapping("/processForm")
+    @PostMapping("/api/processForm")
     public String processForm(@Valid @ModelAttribute("customer") Customer theCustomer, BindingResult theBindingResult) {
         
         if (theBindingResult.hasErrors()) {
