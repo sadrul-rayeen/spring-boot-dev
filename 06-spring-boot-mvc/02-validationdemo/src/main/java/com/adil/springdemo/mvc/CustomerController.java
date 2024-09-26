@@ -32,7 +32,7 @@ public class CustomerController {
         return "customer-form";
     }
 
-    @PostMapping("/processForm")
+    @PostMapping("/api/processForm")
     public String processForm(@Valid @ModelAttribute("customer") Customer theCustomer, BindingResult theBindingResult) {
 
         if (theBindingResult.hasErrors()) {
